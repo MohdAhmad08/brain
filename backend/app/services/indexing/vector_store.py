@@ -140,7 +140,7 @@ class VectorStore:
         conn.row_factory = sqlite3.Row
         # Create vector fallback tables if they don't exist
         conn.execute("""
-            CREATE TABLE IF NOT EXISTS sqlite_vector_store (
+            CREATE TABLE IF NOT EXISTS local_vector_store (
                 id TEXT PRIMARY KEY,
                 media_id INTEGER,
                 document TEXT,
@@ -157,7 +157,7 @@ class VectorStore:
             cursor = conn.cursor()
             for idx in range(len(ids)):
                 cursor.execute(
-                    "INSERT OR REPLACE INTO sqlite_vector_store (id, media_id, document, metadata, embedding) VALUES (?, ?, ?, ?, ?)",
+                    "INSERT OR REPLACE INTO local_vector_store (id, media_id, document, metadata, embedding) VALUES (?, ?, ?, ?, ?)",
                     (
                         ids[idx],
                         metadatas[idx].get("media_id"),
@@ -173,7 +173,7 @@ class VectorStore:
     def _sqlite_delete_by_media(self, media_id: int):
         conn = self._get_sqlite_conn()
         try:
-            conn.execute("DELETE FROM sqlite_vector_store WHERE media_id = ?", (media_id,))
+            conn.execute("DELETE FROM local_vector_store WHERE media_id = ?", (media_id,))
             conn.commit()
         finally:
             conn.close()
@@ -184,9 +184,9 @@ class VectorStore:
             cursor = conn.cursor()
             if media_ids:
                 placeholders = ",".join("?" for _ in media_ids)
-                cursor.execute(f"SELECT * FROM sqlite_vector_store WHERE media_id IN ({placeholders})", tuple(media_ids))
+                cursor.execute(f"SELECT * FROM local_vector_store WHERE media_id IN ({placeholders})", tuple(media_ids))
             else:
-                cursor.execute("SELECT * FROM sqlite_vector_store")
+                cursor.execute("SELECT * FROM local_vector_store")
                 
             rows = cursor.fetchall()
             if not rows:
