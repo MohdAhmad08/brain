@@ -22,8 +22,8 @@ frontend/.env.local
 frontend/.env.development.local
 
 # Local databases and file storage
-database/
-storage/
+/database/
+/storage/
 *.db
 *.db-journal
 
