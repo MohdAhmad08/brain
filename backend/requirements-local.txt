@@ -15,4 +15,7 @@ fpdf2
 numpy
 requests
 rank-bm25
-# Optional heavy AI dependencies removed for Vercel Serverless deployment
+# Optional heavy AI dependencies (fallbacks are triggered if these fail to install/compile on 3.13)
+faster-whisper
+sentence-transformers
+chromadb

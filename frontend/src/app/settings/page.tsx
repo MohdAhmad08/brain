@@ -13,6 +13,7 @@ import {
   Save,
   Activity
 } from "lucide-react";
+import { BACKEND_URL } from "@/services/api";
 
 export default function SettingsView() {
   const [ollamaUrl, setOllamaUrl] = useState("http://localhost:11434");
@@ -36,7 +37,7 @@ export default function SettingsView() {
   const runDiagnostics = async () => {
     // 1. Test Backend Online
     try {
-      const res = await fetch("http://localhost:8000/");
+      const res = await fetch(`${BACKEND_URL}/`);
       if (res.ok) {
         setDiagBackend("online");
       } else {

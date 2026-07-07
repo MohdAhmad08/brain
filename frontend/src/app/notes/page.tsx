@@ -170,7 +170,7 @@ export default function NotesView() {
     // Trigger direct browser download
     const link = document.createElement("a");
     link.href = url;
-    link.download = `${title.replace(/\s+/g, "_")}.${format === "markdown" ? "md" : format}`;
+    link.download = `${title.replace(/\s+/g, "_")}.${format}`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -267,7 +267,7 @@ export default function NotesView() {
               <Layers className="w-3.5 h-3.5 text-zinc-500" />
               <select
                 value={mediaId}
-                onChange={(e) => setMediaId(e.target.value)}
+                onChange={(e) => setMediaId(e.target.value === "" ? "" : Number(e.target.value))}
                 className="bg-transparent border-0 text-xs text-zinc-400 font-medium outline-none cursor-pointer w-full focus:ring-0"
               >
                 <option value="" className="bg-zinc-900">Unlinked (General)</option>

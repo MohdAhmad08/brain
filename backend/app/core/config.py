@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
 
     # Base workspace paths
-    BASE_DIR: Path = Path(__file__).resolve().parent.parent.parent.parent
+    BASE_DIR: Path = Path("/tmp") if os.environ.get("VERCEL") == "1" else Path(__file__).resolve().parent.parent.parent.parent
     STORAGE_DIR: Path = BASE_DIR / "storage"
     
     # Storage subdirectories

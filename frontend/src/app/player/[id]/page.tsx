@@ -14,7 +14,7 @@ import {
   FileCheck,
   FolderOpen
 } from "lucide-react";
-import { api, MediaDetail, TranscriptSegment } from "@/services/api";
+import { api, MediaDetail, TranscriptSegment, BACKEND_URL } from "@/services/api";
 
 export default function MediaPlayer() {
   const params = useParams();
@@ -138,7 +138,7 @@ export default function MediaPlayer() {
             {isVideo && (
               <video
                 ref={mediaRef as any}
-                src={`http://localhost:8000/api/v1/media/thumbnail/${detail.id}`} // Video endpoint maps raw stream
+                src={`${BACKEND_URL}/api/v1/media/thumbnail/${detail.id}`} // Video endpoint maps raw stream
                 controls
                 onTimeUpdate={handleTimeUpdate}
                 className="w-full aspect-video rounded-xl bg-black"
@@ -156,7 +156,7 @@ export default function MediaPlayer() {
                 </div>
                 <audio
                   ref={mediaRef as any}
-                  src={`http://localhost:8000/api/v1/media/thumbnail/${detail.id}`}
+                  src={`${BACKEND_URL}/api/v1/media/thumbnail/${detail.id}`}
                   controls
                   onTimeUpdate={handleTimeUpdate}
                   className="w-full"

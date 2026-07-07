@@ -1,0 +1,9 @@
+frontend/
+src-tauri/
+docker/
+.venv/
+storage/
+database/
+.git/
+.next/
+node_modules/

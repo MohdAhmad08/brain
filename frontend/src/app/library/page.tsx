@@ -12,7 +12,7 @@ import {
   Loader2,
   FolderOpen
 } from "lucide-react";
-import { api, MediaAsset } from "@/services/api";
+import { api, MediaAsset, BACKEND_URL } from "@/services/api";
 
 export default function MediaLibrary() {
   const [media, setMedia] = useState<MediaAsset[]>([]);
@@ -127,7 +127,7 @@ export default function MediaLibrary() {
                 <div className="h-40 bg-zinc-950/60 relative border-b border-glass-border flex items-center justify-center overflow-hidden">
                   {m.thumbnail_path ? (
                     <img 
-                      src={`http://localhost:8000/api/v1/media/thumbnail/${m.id}`} 
+                      src={`${BACKEND_URL}/api/v1/media/thumbnail/${m.id}`} 
                       alt={m.file_name} 
                       className="w-full h-full object-cover group-hover:scale-[1.03] transition-all duration-300"
                       onError={(e) => {
